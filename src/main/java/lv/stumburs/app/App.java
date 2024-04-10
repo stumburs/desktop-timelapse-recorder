@@ -1,6 +1,7 @@
 package lv.stumburs.app;
 
-import lv.stumburs.app.screenshothandler.ScreenshotHandler;
+import lv.stumburs.app.components.SelectOutputFolderButton;
+import lv.stumburs.app.components.TakeScreenshotButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +12,8 @@ public class App {
 
     JFrame f;
 
-    // JFileChooser fileChooser;
-
-    JButton takeScreenshotButton;
+    TakeScreenshotButton takeScreenshotButton;
+    SelectOutputFolderButton selectOutputFolderButton;
 
     public App(int windowWidth, int windowHeight) {
         this.windowWidth = windowWidth;
@@ -22,28 +22,17 @@ public class App {
         f = new JFrame();
         f.setTitle("Desktop Timelapse Recorder");
 
-        takeScreenshotButton = new JButton("Take screenshot");
-        takeScreenshotButton.addActionListener(e -> {
-            try {
-                ScreenshotHandler.TakeScreenshot();
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        takeScreenshotButton = new TakeScreenshotButton("Take screenshot");
 
-        // Add components
-        f.add(takeScreenshotButton);
+        selectOutputFolderButton = new SelectOutputFolderButton("Select output folder");
 
-        f.setLayout(new FlowLayout());
+        f.setLayout(new BorderLayout());
         f.setSize(windowWidth, windowHeight);
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         f.setVisible(true);
 
-/*        fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fileChooser.showSaveDialog(null);
-
-        System.out.println(fileChooser.getCurrentDirectory());
-        System.out.println(fileChooser.getSelectedFile());*/
+        // Add components
+        f.add(takeScreenshotButton, BorderLayout.SOUTH);
+        f.add(selectOutputFolderButton, BorderLayout.CENTER);
     }
 }
