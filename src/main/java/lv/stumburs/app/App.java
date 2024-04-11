@@ -1,5 +1,6 @@
 package lv.stumburs.app;
 
+import lv.stumburs.app.components.MenuBar;
 import lv.stumburs.app.components.SelectOutputFolderButton;
 import lv.stumburs.app.components.TakeScreenshotButton;
 
@@ -10,35 +11,48 @@ public class App {
     final int windowWidth;
     final int windowHeight;
 
-    JFrame f;
+    JFrame app;
+
+    JLabel jLabel;
+
+    JTextPane centerPanel;
+
+    MenuBar menuBar;
 
     TakeScreenshotButton takeScreenshotButton;
     SelectOutputFolderButton selectOutputFolderButton;
 
     public App(int windowWidth, int windowHeight) {
-
-        /*        try {
-            UIManager.setLookAndFeel( new FlatLightFlatIJTheme() );
-        } catch( Exception ex ) {
-            System.err.println( "Failed to initialize LaF" );
-        }*/
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
-
-        f = new JFrame();
-        f.setTitle("Desktop Timelapse Recorder");
 
         takeScreenshotButton = new TakeScreenshotButton("Take screenshot");
 
         selectOutputFolderButton = new SelectOutputFolderButton("Select output folder");
 
-        f.setLayout(new BorderLayout());
-        f.setSize(windowWidth, windowHeight);
-        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        f.setVisible(true);
+        centerPanel = new JTextPane();
+        centerPanel.setLayout(new FlowLayout());
+
+        jLabel = new JLabel("Yes");
+
+        menuBar = new MenuBar();
+
+        app = new JFrame();
+        app.setTitle("Desktop Timelapse Recorder");
+        app.setLayout(new BorderLayout());
+        app.setSize(windowWidth, windowHeight);
+        app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        app.setVisible(true);
+        app.setJMenuBar(menuBar);
 
         // Add components
-        f.add(takeScreenshotButton, BorderLayout.SOUTH);
-        f.add(selectOutputFolderButton, BorderLayout.CENTER);
+
+        // Center frame
+        centerPanel.setFocusable(false);
+        centerPanel.add(selectOutputFolderButton);
+        centerPanel.add(takeScreenshotButton);
+
+        // App frame
+        app.add(centerPanel, BorderLayout.CENTER);
     }
 }
