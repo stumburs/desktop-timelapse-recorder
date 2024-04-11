@@ -16,6 +16,12 @@ public class App {
     SelectOutputFolderButton selectOutputFolderButton;
 
     public App(int windowWidth, int windowHeight) {
+
+        /*        try {
+            UIManager.setLookAndFeel( new FlatLightFlatIJTheme() );
+        } catch( Exception ex ) {
+            System.err.println( "Failed to initialize LaF" );
+        }*/
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
 
