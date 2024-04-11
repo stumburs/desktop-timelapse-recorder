@@ -5,7 +5,9 @@ import lv.stumburs.app.components.SelectOutputFolderButton;
 import lv.stumburs.app.components.TakeScreenshotButton;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.awt.*;
+import java.text.NumberFormat;
 
 public class App {
     final int windowWidth;
@@ -18,6 +20,15 @@ public class App {
     JTextPane centerPanel;
 
     MenuBar menuBar;
+
+    String[] timeIntervals = {"ms", "s", "min"};
+    JComboBox<String> timeIntervalsDropdown;
+
+    // Number input
+    NumberFormat format;
+    NumberFormatter numberFormatter;
+    JFormattedTextField numberInputField;
+    JButton testButton;
 
     TakeScreenshotButton takeScreenshotButton;
     SelectOutputFolderButton selectOutputFolderButton;
@@ -37,6 +48,24 @@ public class App {
 
         menuBar = new MenuBar();
 
+        timeIntervalsDropdown = new JComboBox<>(timeIntervals);
+        timeIntervalsDropdown.setSelectedIndex(1); // seconds
+
+        // Number input
+        format = NumberFormat.getIntegerInstance();
+        format.setGroupingUsed(false);
+
+        numberFormatter = new NumberFormatter(format);
+        numberFormatter.setValueClass(Long.class);
+        numberFormatter.setAllowsInvalid(false);
+
+        numberInputField = new JFormattedTextField(numberFormatter);
+        numberInputField.setValue(10);
+
+        testButton = new JButton("Test");
+        testButton.addActionListener(e -> System.out.println(numberInputField.getValue().toString() + timeIntervalsDropdown.getSelectedItem()));
+
+        // App
         app = new JFrame();
         app.setTitle("Desktop Timelapse Recorder");
         app.setLayout(new BorderLayout());
@@ -49,6 +78,9 @@ public class App {
 
         // Center frame
         centerPanel.setFocusable(false);
+        centerPanel.add(numberInputField);
+        centerPanel.add(timeIntervalsDropdown);
+        centerPanel.add(testButton);
         centerPanel.add(selectOutputFolderButton);
         centerPanel.add(takeScreenshotButton);
 
