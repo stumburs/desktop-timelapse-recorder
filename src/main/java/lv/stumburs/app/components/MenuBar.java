@@ -29,9 +29,8 @@ public class MenuBar extends JMenuBar {
             String version = "1.0";
             String githubLink = "https://github.com/stumburs/desktop-timelapse-recorder";
             String message = "<html><body>" +
-                    "<h2>About</h2>" +
+                    "<h2>Desktop Timelapse Recorder v" + version + "</h2>" +
                     "<p>Created by: <b>" + creator + "</b> in collaboration with ChatGPT</p>" +
-                    "<p>Version: " + version + "</p>" +
                     "<p>GitHub: <a href=\"" + githubLink + "\">" + githubLink + "</a></p>" +
                     "</body></html>";
             String title = "About";
@@ -53,7 +52,7 @@ public class MenuBar extends JMenuBar {
                     }
                 }
             });
-            JOptionPane.showMessageDialog(null, label, title, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, label, title, JOptionPane.PLAIN_MESSAGE);
         });
 
         fileMenu.add(exitMenuItem);
