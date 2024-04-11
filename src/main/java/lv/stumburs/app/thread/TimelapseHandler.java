@@ -1,5 +1,7 @@
 package lv.stumburs.app.thread;
 
+import lv.stumburs.app.screenshothandler.ScreenshotHandler;
+
 import java.time.Duration;
 
 public class TimelapseHandler extends Thread {
@@ -15,8 +17,14 @@ public class TimelapseHandler extends Thread {
     public void run() {
         System.out.println("Timelapse thread started with interval: " + interval);
 
+        ScreenshotHandler.reset();
+
         while (!Thread.interrupted()) {
-            System.out.println("Screenshot taken");
+            try {
+                ScreenshotHandler.TakeScreenshot();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             try {
                 Thread.sleep(interval);
             } catch (InterruptedException e) {

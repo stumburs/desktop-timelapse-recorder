@@ -112,23 +112,4 @@ public class App {
             default -> throw new IllegalStateException("Unexpected value: " + selectedItem);
         };
     }
-/*    private Duration calculateIntervalDuration() {
-        Duration duration;
-
-        switch (Objects.requireNonNull(timeIntervalsDropdown.getSelectedItem()).toString()) {
-            case "ms" -> {
-                return Duration.ofMillis((Long) numberInputField.getValue());
-            }
-            case "s" -> {
-                return Duration.ofSeconds((Long) numberInputField.getValue());
-            }
-            case "min" -> {
-                return Duration.ofMinutes((Long) numberInputField.getValue());
-            }
-            case "h" -> {
-                return Duration.ofHours((Long) numberInputField.getValue());
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + timeIntervalsDropdown.getSelectedItem());
-        }
-    }*/
 }
