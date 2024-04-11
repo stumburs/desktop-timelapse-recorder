@@ -1,13 +1,10 @@
 package lv.stumburs.app;
 
+import lv.stumburs.app.components.*;
 import lv.stumburs.app.components.MenuBar;
-import lv.stumburs.app.components.SelectOutputFolderButton;
-import lv.stumburs.app.components.TakeScreenshotButton;
 
 import javax.swing.*;
-import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.text.NumberFormat;
 
 public class App {
     final int windowWidth;
@@ -21,13 +18,10 @@ public class App {
 
     MenuBar menuBar;
 
-    String[] timeIntervals = {"ms", "s", "min"};
-    JComboBox<String> timeIntervalsDropdown;
+    TimeIntervalDropdown timeIntervalsDropdown;
 
     // Number input
-    NumberFormat format;
-    NumberFormatter numberFormatter;
-    JFormattedTextField numberInputField;
+    NumberInputField numberInputField;
     JButton testButton;
 
     TakeScreenshotButton takeScreenshotButton;
@@ -48,19 +42,10 @@ public class App {
 
         menuBar = new MenuBar();
 
-        timeIntervalsDropdown = new JComboBox<>(timeIntervals);
-        timeIntervalsDropdown.setSelectedIndex(1); // seconds
+        timeIntervalsDropdown = new TimeIntervalDropdown();
 
         // Number input
-        format = NumberFormat.getIntegerInstance();
-        format.setGroupingUsed(false);
-
-        numberFormatter = new NumberFormatter(format);
-        numberFormatter.setValueClass(Long.class);
-        numberFormatter.setAllowsInvalid(false);
-
-        numberInputField = new JFormattedTextField(numberFormatter);
-        numberInputField.setValue(10);
+        numberInputField = new NumberInputField();
 
         testButton = new JButton("Test");
         testButton.addActionListener(e -> System.out.println(numberInputField.getValue().toString() + timeIntervalsDropdown.getSelectedItem()));
